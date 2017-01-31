@@ -7,8 +7,11 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,23 +32,30 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        getMenuInflater().inflate(R.menu.contexts_menu,menu);
+
         super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater=getMenuInflater();
+
+        getMenuInflater().inflate(R.menu.contexts_menu,menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info= (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int listPosition = info.position;
         Intent intent=new Intent();
+
+
         switch (item.getItemId()) {
             case R.id.call:
                 intent.setAction(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:12312"));
+                intent.setData(Uri.parse("tel:"+contact_no[listPosition]));
                 startActivity(intent);
                 break;
 
             case R.id.sms:
                 intent.setAction(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("smsto:12312"));
+                intent.setData(Uri.parse("smsto:"+contact_no[listPosition]));
                 startActivity(intent);
                 break;
         }
