@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">InterActivityComm</string>
+    <string name="edtName">Name</string>
+    <string name="btnNext">Next</string>
+    <string name="edtResult">Result</string>
+    <string name="btnBack">Back</string>
+</resources>
